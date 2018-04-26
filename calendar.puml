@@ -1,0 +1,35 @@
+@startuml
+
+interface CommonCalendar {
+  getCalendars()
+  getCalendar(name)
+}
+
+class Company {
+  -id: int
+  -name: string
+  getEmployees()
+}
+
+class Employee {
+  -id: int
+  -company_id: int
+  -name: string
+  -email: string
+  getCompany()
+}
+
+class Calendar {
+  -id: int
+  -name: string
+}
+
+CommonCalendar <|-- Company
+CommonCalendar <|-- Employee
+
+Company "1" -- "*" Employee
+Company "*" -- "*" Calendar
+Employee "*" -- "*" Calendar
+
+
+@enduml
