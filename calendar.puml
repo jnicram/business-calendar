@@ -22,14 +22,89 @@ class Employee {
 class Calendar {
   -id: int
   -name: string
+  getReservations()
 }
+
+abstract class Resource {
+  #id: int
+  #name: string
+  isAvailable(dateFrom, dateTo)
+}
+
+class MeetingRoom
+class ConferenceRoom
+class Projector
+
+class ResourceReservation {
+  -id: int
+  -resource_id: int
+  getResources()
+}
+
+class Meeting {
+  getEmployees()
+}
+
+abstract class Reservation {
+  -id: int
+  -name: string
+  -description: string
+  -location: string
+  -startDate: dateTime
+  -endDate: dateTime
+  -seriesEndDate: date
+  -frequency: enum
+  -monthlyRepeatType: enum
+  -weeklyRepeatType: enum
+  -frequencyInterval: int
+  getResources()
+  getMeetings()
+}
+
+enum Frequency {
+  NONE
+  DAILY
+  WEEKLY
+  MONTHLY
+  YEARLY
+}
+
+enum MonthlyRepeatType {
+  NONE
+  DAY_OF_MONTH
+  DAY_OF_WEEK
+}
+
+enum WeeklyRepeatType {
+  NONE
+  MONDAY
+  TUESDAY
+  WEDNESDAY
+  THURSDAY
+  FRIDAY
+  SATURDAY
+  SUNDAY
+}
+
+Reservation *-- Frequency
+Reservation *-- MonthlyRepeatType
+Reservation *-- WeeklyRepeatType
 
 CommonCalendar <|-- Company
 CommonCalendar <|-- Employee
 
+Resource <|-- MeetingRoom
+Resource <|-- ConferenceRoom
+Resource <|-- Projector
+Reservation <|-- Meeting
+Reservation <|-- ResourceReservation
+
 Company "1" -- "*" Employee
-Company "*" -- "*" Calendar
+Company "1" -- "*" Calendar
 Employee "*" -- "*" Calendar
+ResourceReservation "1" -- "*" Resource
+Reservation "*" -- "1" Calendar
+
 
 
 @enduml
